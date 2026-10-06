@@ -1,0 +1,6 @@
+{
+  "name": "Aetheria — Intelligent Architectural & Luxury Commerce",
+  "description": "Next-generation AI-powered multi-vendor e-commerce platform featuring semantic discovery, visual search, conversational shopping concierge, smart cart economics, real-time order tracking, and seller intelligence.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

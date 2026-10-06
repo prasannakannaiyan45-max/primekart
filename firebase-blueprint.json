@@ -1,0 +1,527 @@
+{
+  "entities": {
+    "AdminMarker": {
+      "title": "AdminMarker",
+      "description": "Trusted marker document designating a user UID as a platform administrator.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Publicly readable non-PII user profile storing role, loyalty tier, and shopping preferences.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "role": {
+          "type": "string",
+          "enum": ["customer", "seller", "admin"]
+        },
+        "loyaltyPoints": {
+          "type": "number"
+        },
+        "loyaltyTier": {
+          "type": "string",
+          "enum": ["Member", "Silver", "Gold", "Patron"]
+        },
+        "preferredCurrency": {
+          "type": "string",
+          "enum": ["USD", "EUR", "INR", "GBP"]
+        },
+        "ecoPreference": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "displayName",
+        "role",
+        "loyaltyPoints",
+        "loyaltyTier",
+        "preferredCurrency",
+        "ecoPreference",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII document storing user email, phone, and shipping address.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 254
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 30
+        },
+        "shippingAddress": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 300
+        },
+        "city": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "postalCode": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 20
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "email",
+        "phone",
+        "shippingAddress",
+        "city",
+        "postalCode",
+        "country",
+        "updatedAt"
+      ]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "E-commerce product listing with specifications, stock, pricing, and sustainability metrics.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 140
+        },
+        "brand": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Audio & Acoustics",
+            "Architectural Living",
+            "Botanical Formulation",
+            "Precision Horology"
+          ]
+        },
+        "subcategory": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "price": {
+          "type": "number"
+        },
+        "originalPrice": {
+          "type": "number"
+        },
+        "stock": {
+          "type": "number"
+        },
+        "rating": {
+          "type": "number"
+        },
+        "reviewCount": {
+          "type": "number"
+        },
+        "imageUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 2000
+        },
+        "specsSummary": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 600
+        },
+        "sustainabilityScore": {
+          "type": "number"
+        },
+        "carbonFootprintKg": {
+          "type": "number"
+        },
+        "ecoMaterialTag": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "sellerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "sellerName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "isPublished": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "brand",
+        "category",
+        "subcategory",
+        "price",
+        "originalPrice",
+        "stock",
+        "rating",
+        "reviewCount",
+        "imageUrl",
+        "description",
+        "specsSummary",
+        "sustainabilityScore",
+        "carbonFootprintKg",
+        "ecoMaterialTag",
+        "sellerId",
+        "sellerName",
+        "isPublished",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ProductReview": {
+      "title": "ProductReview",
+      "description": "Customer review under a specific product subcollection.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "productId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "rating": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "comment": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 1500
+        },
+        "verifiedPurchase": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "productId",
+        "authorId",
+        "authorName",
+        "rating",
+        "title",
+        "comment",
+        "verifiedPurchase",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order with payment status, fulfillment tracking, and carbon offset data.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "customerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "customerName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "sellerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "itemsSummary": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 1000
+        },
+        "itemCount": {
+          "type": "number"
+        },
+        "subtotal": {
+          "type": "number"
+        },
+        "discountAmount": {
+          "type": "number"
+        },
+        "taxAmount": {
+          "type": "number"
+        },
+        "shippingCost": {
+          "type": "number"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "couponCode": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": ["Card", "UPI", "Wallet", "NetBanking", "COD"]
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["Paid", "Pending_COD", "Refunded"]
+        },
+        "deliveryOption": {
+          "type": "string",
+          "enum": ["Standard_Eco", "Express_Air", "White_Glove"]
+        },
+        "shippingRegion": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Confirmed",
+            "Processing",
+            "Shipped",
+            "Out_For_Delivery",
+            "Delivered",
+            "Cancelled",
+            "Return_Requested",
+            "Refunded"
+          ]
+        },
+        "trackingNumber": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "carbonOffsetKg": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "customerId",
+        "customerName",
+        "sellerId",
+        "itemsSummary",
+        "itemCount",
+        "subtotal",
+        "discountAmount",
+        "taxAmount",
+        "shippingCost",
+        "totalAmount",
+        "couponCode",
+        "paymentMethod",
+        "paymentStatus",
+        "deliveryOption",
+        "shippingRegion",
+        "status",
+        "trackingNumber",
+        "carbonOffsetKg",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promotional coupon or sustainability reward code.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "discountType": {
+          "type": "string",
+          "enum": ["percentage", "fixed"]
+        },
+        "discountValue": {
+          "type": "number"
+        },
+        "minOrderAmount": {
+          "type": "number"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "ecoBonus": {
+          "type": "boolean"
+        },
+        "createdBy": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "code",
+        "description",
+        "discountType",
+        "discountValue",
+        "minOrderAmount",
+        "isActive",
+        "ecoBonus",
+        "createdBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": "AdminMarker",
+      "description": "Stores administrator UIDs for role verification."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores public non-PII user profiles, loyalty tiers, and preferences."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": "UserPrivateInfo",
+      "description": "Stores isolated PII (email, phone, shipping address) restricted to owner or admin."
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Stores catalog products managed by sellers and administrators."
+    },
+    "/products/{productId}/reviews/{reviewId}": {
+      "schema": "ProductReview",
+      "description": "Stores customer reviews scoped under a parent product."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Stores customer orders with fulfillment state machine and payment status."
+    },
+    "/coupons/{couponId}": {
+      "schema": "Coupon",
+      "description": "Stores promotional discount codes and eco-shipping incentives."
+    }
+  }
+}
